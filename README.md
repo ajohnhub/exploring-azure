@@ -8,21 +8,17 @@ This walkthrough demonstrates how to create Resource Groups & Storage Accounts, 
 
 <h2>Environments and Technologies Used</h2>
 
-- Microsoft Azure (Virtual Machines/Compute)
-- Remote Desktop
-- Internet Information Services (IIS)
+- Microsoft Azure (Compute)
 
 <h2>Operating Systems Used </h2>
 
-- Windows 10</b> (21H2)
+- Microsoft Windows
 
 <h2>List of Prerequisites</h2>
 
-- Azure Virtual Machine
-- osTicket Installation files
-- Heidi SQL
+- Microsoft Azure subscription
 
-<h2>Installation Steps</h2>
+<h2>Walkthrough Steps</h2>
 
 <p>
 </p>
