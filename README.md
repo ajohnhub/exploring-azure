@@ -2,7 +2,7 @@
 
 
 <h1>Creating Resource Groups, Storage Accounts, and Editing Files</h1>
-This walkthrough demonstrates how to create Resource groups, how to create Storage Accounts, and how to edit files that you created on your local desktop.
+This walkthrough demonstrates how to create Resource Groups & Storage Accounts, and how to edit files that you created on your local desktop.
 </br>
 
 
