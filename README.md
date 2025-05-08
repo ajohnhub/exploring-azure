@@ -2,7 +2,8 @@
 
 
 <h1>Creating Resource Groups, Storage Accounts, and Editing Files</h1>
-This tutorial outlines the prerequisites and installation of the open-source help desk ticketing system osTicket.<br />
+This walkthrough demonstrates how to create Resource groups, how to create Storage Accounts, and how to edit files that you created on your local desktop.
+</br>
 
 
 <h2>Environments and Technologies Used</h2>
