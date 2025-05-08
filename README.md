@@ -1,81 +1,107 @@
 ![image](https://user-images.githubusercontent.com/109401839/230745596-57cee9bd-687c-427d-b0db-d1080df77f7e.png)
 
-# Azure Setup
 
-### First, we will set up our Azure subscription and resources. Then, we will cover topics such as failed authentication, log observation, and an overview of Azure Active Directory, including users, groups, and access management.
+<h1>osTicket - Prerequisites and Installation</h1>
+This tutorial outlines the prerequisites and installation of the open-source help desk ticketing system osTicket.<br />
 
-#### Environments and Technologies Utilized 
 
-- Microsoft Azure
-- SQL Server
-- Event Viewer
-- Operating System: Windows 10 Pro (21H2)
+<h2>Environments and Technologies Used</h2>
 
-## Resources & SQL Server Vulnerabilties
+- Microsoft Azure (Virtual Machines/Compute)
+- Remote Desktop
+- Internet Information Services (IIS)
 
-Actions and Observations:
-1. Create a Windows 10 Pro virtual machine.
-2. Assign the name "RG-Cyber-Lab" to the resource group.
-3. Set the name of the virtual network as "Lab-VNet".
-4. Double-check the virtual machine settings and proceed with creation.
+<h2>Operating Systems Used </h2>
 
-Configure Network Security Group:
-- Set up a Layer 4 firewall (Network Security Group) to allow all inbound traffic.
-- This firewall is intentionally designed to attract threat actors such as hackers, bots, and attackers to try accessing our virtual machine.
+- Windows 10</b> (21H2)
 
-Resource Group and Network Security Group:
-- Access the resource group to view associated components of the virtual machine being created.
-- Locate and edit the network security group, either through search or within the resource groups.
+<h2>List of Prerequisites</h2>
 
-Inbound Security Rule:
-- Create an inbound security rule called "DangerAllInBound" with the settings "Any" to handle all types of traffic.
+- Azure Virtual Machine
+- osTicket Installation files
+- Heidi SQL
 
-Ping the VM's IP Address:
-- Open the command prompt (CMD) and attempt to ping the IP Address of the VM.
-- Verify if the ping command was successful.
+<h2>Installation Steps</h2>
 
-Remote into the VM:
-- Use "Remote Desktop Connection" to establish a remote connection to the VM.
-- This step is necessary to change the firewall setting within the VM.
+<p>
+</p>
+<p>
+Create a resource group and title it "osTicket". Afterwards create a VM with 2-4 CPUs. In this example I will be using 4 CPUs.
+  
+ <img src="https://i.imgur.com/OPaIGoN.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+</p>
+<br />
+<p>
+</p>
+<p>Next simply connect to your newly created VM using RDP using the public IPv4 address. If you are a Mac user you will have to download Microsoft RDP. 
+</p>
+<img src="https://i.imgur.com/uLVKzxS.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+</p>
+<br />
 
-Turn off Windows Firewall:
-- After logging in to the VM, search for "wf.msc" in the start menu to launch the "Windows Defender Firewall Advanced Security" program.
-- Access "Windows Defender Firewall Properties".
-- Disable the "Firewall State" on each tab.
-- For now, ignore IPSEC settings.
+<p>
+</p>
+<p>
+Alright, now that you are connected to your VM you will have to enable IIS. Simply access the control panel then select uninstall a program. Off to the left select "Turn windows features on or off". A list will appear then you will enable Internet Information Services.
+</p>  
+<img src="https://i.imgur.com/qtEnuWu.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+</p>
+<br />
+</p>
+<p>
+Excellent. Now that you have enabled IIS we need to install Web Platform Installer. I have provided a link here: https://drive.google.com/drive/u/0/folders/1APMfNyfNzcxZC6EzdaNfdZsUwxWYChf6
+  That link will provide you with all of the material you need to download to get osTicket up and running. Simply click the link and install the Web Platform Installer
+</p>
+<img src="https://i.imgur.com/AxHCfQ6.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>  
+</p>
+<p>
+Once you have installed Web Installer Platform open it. From inside the application you are going to install MySQL 5.5 Afterwards install x86 version of PHP up until 7.3. There are some failed files such as C++ redistributable package as well as PHP 7.3.8 and PHP Manager for IIS those files can be found with the install link.
+</p>
+<img src="https://i.imgur.com/JJ8bZeJ.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<p>
+</p>
+<p>
+Next download osTicket. Then extract and copy the "upload" folder into c:\inetpub\wwwroot. Afterwards rename the folder to osTicket
+</P>
+<img src="https://i.imgur.com/TUGiSKi.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+</p>
+<br />
+<p>
+</p>
+<p>
+Open IIS Manager and restart the server. Once inside IIS manager go to Sites->Default->osTicket on the right, click "Browse*.80" from there your default browser should open osTicket webserver.
+</p>
+<img src="https://i.imgur.com/4AkTkV0.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<br />
+<p>
+</p>
+<p>
+Go back into IIS manager and enable some extensions. To do this you have to go to Sites->Default->osTicket
+Then double click on PHP manager. Click on "Disable or enable an extension" Enable "php_intl.dll" & "php_opcache.dll" then refresh the osTicket webserver and obsereve the changes "Intl Extension" should now be enabled. 
+</p>
+<img src="https://i.imgur.com/APZgUTT.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<br />
+<p>
+</p>
+<p>
+Go back into c:\inetpub\wwwroot\osTicket\include\ost-sampleconfig.php rename the file to c:\inetpub\wwwroot\osTicket\include\ost-config.php
+Assign permissions to ost-config.php Disable inheritance->Removeall
+New Permissions->Everyone->all
+</p>
+<img src="https://i.imgur.com/1nYaYGe.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<br />
+<p>
+</p>
+<p>
+Afterwards continue setting up osTicket in the browser (click continue) then you will name the Helpdesk to your liking. Select a default email that will receive emails from customers who submit tickets. 
+</p>
+<img src="https://i.imgur.com/RmVk3q5.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<br />
+<p>
+<p>Continue Setting up osticket in the browser MySQL Database: osTicket MySQL Username: root MySQL Password: Password1 Click “Install Now!”
+Congratulations, hopefully it is installed with no errors!
+Clean up
+Delete: C:\inetpub\wwwroot\osTicket\setup
+Set Permissions to “Read” only: C:\inetpub\wwwroot\osTicket\include\ost-config.php
+Login to the osTicket Admin Panel (http://localhost/osTicket/scp/login.php)
 
-Observe the changes in CMD:
-- Return to the command prompt (CMD) and observe any changes or improvements.
-
-Install SQL Server Evaluation:
-- Download the SQL Server Evaluation from the provided link.
-- Install the .exe file and select the "Download Media" or "ISO" option.
-- Open the designated folder and proceed to mount the media.
-- The mounted media will appear as a disk file under the "This PC" side panel.
-
-Installation of SSMS (SQL Server Management Studio):
-- Execute the "sql install" command to begin the installation process.
-- During installation, select "Mixed Mode" to enable both online and local logins to the SQL Server.
-- The default username is "sa" with the password ```LabTest12345``` (You can choose a different password, but make sure to document it).
-- Add your current user and enter the associated password.
-- Complete the installation to establish connectivity to the SQL Database.
-
-Downloading Server Management Studio:
-- Proceed to download Server Management Studio for further operations.
-
-Configuring Audit Object Access Setting:
-- Open a command prompt with administrative permissions.
-- Navigate to the Command Prompt from the Start menu and select "Run as administrator".
-- If prompted by the User Account Control dialogue box, select "Continue".
-- Enable auditing from SQL Server by executing the following statement in the command prompt:
-
-```
-audit-pol /set /subcategory: "application generated" /success:enable /failure:enable
-```
-
-Enabling Logging for SQL Server:
-- Open a command prompt with administrative permissions.
-- Execute the necessary command to enable logging for SQL Server to be ported into Windows Event Viewer.
-
-Closing the Command Prompt:
-- Close the command prompt window.
